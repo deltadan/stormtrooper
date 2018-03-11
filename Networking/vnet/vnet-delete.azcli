@@ -13,8 +13,6 @@
 RG=STRG
 vnetName=STVNET
 
-
-# Create VNET with Customer Managed DNS Servers
-az network vnet update -g $RG \
-                       -n $vnetName \
-                       --dns-servers 10.0.0.4 10.0.0.5
+#Delete Virtual Network
+az network vnet delete -g $RG \
+                       -n $vnetName
