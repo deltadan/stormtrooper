@@ -2,7 +2,7 @@
 
 # Welcome to Stormtropper!
 
-In DevOps we want NO snowflakes, meaning that everything is the same everytime. Scripting is the only way to ensure that your environments be the same everytime by ensuring there is never human error. I write scripts all the time using the Azure CLI, but it feels like I'm always having to figure out the same commands past over and over.
+In DevOps we want NO snowflakes, meaning that everything is the same everytime. Scripting is the only way to ensure that your environments be the same everytime and remove the risk of human error. I write scripts all the time using the Azure CLI, but it feels like I'm always having to figure out the same commands past over and over.
 
 The Stormtroppers in Starwars weren't supposed to think just follow orders, and that's exactly the model of this project! Just find a sample script, tweak to your environment and then execute.
 
