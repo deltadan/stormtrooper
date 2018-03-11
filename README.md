@@ -8,7 +8,7 @@ The Stormtroppers in Starwars weren't supposed to think just follow orders, and 
 
 Stormtropper is a ever growing library of Azure CLI samples that you can use to build our your scripts quickly without having to do the heavy lifting of figuring out all the switches and commands.
 
-# Azure CLI
+## Azure CLI
 
 The Azure CLI is a powerful and fast tool that can be used to work with almost any service in Azure. The AZ CLI is cross platform and can be installed and run from Windows, Macs, Linux and even a Docker container.
 
@@ -46,7 +46,7 @@ vnet-delete.azcli
 
 The Azure CLI requires that you authenticate to run commands against your subscription.  Run the following command to authenticate.
 ```
-az login --username [yourname] --password [your-password]
+az login --username [user@domain.com] --password [your-password]
 ```
 ## FAQ
 
