@@ -1,9 +1,33 @@
+#!/bin/bash
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+
+#Variables for Script
+RG=STRG
+location=centralus
+vnetName=STVNET
+vnetSubnetName1=Apps
+vnetSubnetName2=Data
+
+
 # Create a Resource Group
-az group create -n CLIRefRG -l "centralus"
+az group create -n $RG -l $location
 
 # Create the Virtual Network
-az network vnet create --resource-group CLIRefRG -n CLIRefVNET --address-prefixes 10.0.0.0/16 -l "centralus"
+az network vnet create -g STRG \
+                       -l "centralus" \
+                       -n STVNET \
+                       --address-prefixes 10.0.0.0/16
+
 
 #Create the Subnets for the Virtual Network
-az network vnet subnet create --resource-group CLIRefRG --vnet-name CLIRefVNET -n Apps --address-prefix 10.0.1.0/24
-az network vnet subnet create --resource-group CLIRefRG --vnet-name CLIRefVNET -n Data --address-prefix 10.0.2.0/24
+az network vnet subnet create -g $RG \
+                              -n $vnetSubnetName1 \
+                              --vnet-name $vnetName \
+                              --address-prefix 10.0.1.0/24
+
+az network vnet subnet create -g $RG \
+                              -n $vnetSubnetName2 \
+                              --vnet-name $vnetName \
+                              --address-prefix 10.0.2.0/24
