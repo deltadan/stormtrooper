@@ -5,16 +5,19 @@
 # Copyright (c) 2018 Dan Patrick - @deltadan
 #
 #Script Purpose
-# - This script should be run to Create a new Resource Group
-# - List all Resource Groups in subscription in a table 
+# - Delete VM in a Resource Group
+# - Delete all VMs in a Resource Group
 ###########################################################################################
 
 #Variables for Script
 RG=STRG
-location=centralus
+vmName=STVM
 
-# Create a Resource Group (only needed if the RG doesn't exsist)
-az group create -n $RG -l $location
+#Delete Azure VM
+az vm delete -g $RG \
+             -n $vmName \
+             --yes
 
-# List Resource Groups in Table format
-az group list -o table
+#Delete All VMs in a Resource Group
+az vm delete --ids $(az vm list -g $RG --query "[].id" -o tsv) \
+             --yes

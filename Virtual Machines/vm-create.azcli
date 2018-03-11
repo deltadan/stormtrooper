@@ -1,0 +1,29 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - Create Virtual Machine in different ways
+###########################################################################################
+
+#Variables for Script
+RG=STRG
+location=centralus
+vmName=STVM
+vmImageLinux=UbuntuLTS
+vmImageWindows=Win2016Datacenter
+
+#Create Linux VM with minimal inputs
+az vm create -n $vmName \
+             -g $RG \
+             -l $location \
+             --image $vmImageLinux \
+             --generate-ssh-keys
+
+#Create Windows VM with minimal inputs
+az vm create -n $vmName \
+             -g $RG \
+             -l $location \
+             --image $vmImageWindows
