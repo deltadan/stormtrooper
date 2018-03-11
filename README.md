@@ -55,3 +55,18 @@ Q: Can I help to add scripts to the reference?
 
 A: Yes!  Feel free to create your own scripts or update mine!  Submit a Pull Request!
 
+Q: Can I use this code?
+
+A: Yes, this project is released using the MIT License.  Please review the License file in the root of the Repo.
+
+Q: Do you have PowerShell versions of these scripts?
+
+A: I have many, but have not built out a project yet.
+
+Q: I'm having an issue with a script.
+
+A: You can submit issues on the issues tab of the project.
+
+Q: I want to learn about the Azure CLI?  Do you have training?
+
+A: See my course on the Azure CLI at skillmeup.com. https://skillmeup.com/courses/player/azure-cli-2
