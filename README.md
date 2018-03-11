@@ -1,9 +1,12 @@
 <img src="https://octodex.github.com/images/stormtroopocat.jpg" width="200" height="200" />
-# Welcome to the Azure CLI Reference!
+
+# Welcome to Stormtropper!
+
+In DevOps we want NO snowflakes and that's exacty why I created Stormtropper. Stormtropper is a ever growing library of Azure CLI samples that you can use in your environments.
 
 The Azure CLI is a powerful and fast tool that can be used to work with almost any service in Azure. The AZ CLI is cross platform and can be installed and run from Windows, Macs, Linux and even a Docker container.
 
-My goal with this reference is to provide you with real world samples that you can use for your DevOps implementations. Microsoft provides an extensive [reference](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest), but I&#39;ve found it be to be much easier if I have an example.
+My goal for Stormtropper is to provide real world samples that you can use for your DevOps implementations. Microsoft provides an extensive [reference](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest), but I&#39;ve found it be to be much easier if I have an example.
 
 ## BASH, Visual Studio Code &amp; Azure CLI Extension
 
