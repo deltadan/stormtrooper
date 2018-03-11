@@ -2,9 +2,9 @@
 
 # Welcome to Stormtropper!
 
-In DevOps we want NO snowflakes, meaning that you script everything so there is never human error. Scripting is the only way to ensure that your environments be the same everytime. I write scripts all the time using the Azure CLI, but it feels like I'm always having to figure out the sames things I've done in the past over and over.
+In DevOps we want NO snowflakes, meaning that you script everything so there is never human error. Scripting is the only way to ensure that your environments be the same everytime. I write scripts all the time using the Azure CLI, but it feels like I'm always having to figure out the same commands past over and over.
 
-The Stormtroppers in Starwars weren't supposed to think just follow orders, and that's exactly the model of this project!
+The Stormtroppers in Starwars weren't supposed to think just follow orders, and that's exactly the model of this project! Just find a sample script, tweak to your environment and then execute.
 
 Stormtropper is a ever growing library of Azure CLI samples that you can use to build our your scripts quickly without having to do the heavy lifting of figuring out all the switches and commands.
 
