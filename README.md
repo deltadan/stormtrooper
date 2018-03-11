@@ -19,6 +19,7 @@ My goal for Stormtropper is to provide real world samples that you can use for y
 All the scripts in this reference are written in bash.  If you wish to run these scripts natively on Windows you will first need to [install](https://docs.microsoft.com/en-us/windows/wsl/install-win10) the Windows Subsystem for Linux.  After you have bash for Windows up and running you will then need to install the Azure CLI for bash (even if you already had it running for Windows).  You can use this install-cli script from your bash prompt.
 
 All code here using was written using [Visual Studio Code](https://code.visualstudio.com/) with the [Azure CLI Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azurecli). The great thing about this product is that it supplies intellisense when you are writing your code and also supports running from within the terminal.
+![CODECLI](https://github.com/Microsoft/vscode-azurecli/raw/master/images/in_action.gif)
 
 ## Folders
 
