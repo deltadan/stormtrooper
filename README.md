@@ -2,7 +2,13 @@
 
 # Welcome to Stormtropper!
 
-In DevOps we want NO snowflakes and that's exacty why I created Stormtropper. Stormtropper is a ever growing library of Azure CLI samples that you can use in your environments.
+In DevOps we want NO snowflakes, meaning that you script everything so there is never human error. Scripting is the only way to ensure that your environments be the same everytime. I write scripts all the time using the Azure CLI, but it feels like I'm always having to figure out the sames things I've done in the past over and over.
+
+The Stormtroppers in Starwars weren't supposed to think just follow orders, and that's exactly the model of this project!
+
+Stormtropper is a ever growing library of Azure CLI samples that you can use to build our your scripts quickly without having to do the heavy lifting of figuring out all the switches and commands.
+
+# Azure CLI
 
 The Azure CLI is a powerful and fast tool that can be used to work with almost any service in Azure. The AZ CLI is cross platform and can be installed and run from Windows, Macs, Linux and even a Docker container.
 
