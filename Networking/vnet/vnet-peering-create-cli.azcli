@@ -1,0 +1,16 @@
+# Get the Resource IDs for VNETA and VNETB.
+
+az network vnet show --resource-group CLIRefRG --name CLIRefVNETA --query id --out tsv
+az network vnet show --resource-group CLIRefRG --name CLIRefVNETB --query id --out tsv
+
+# Peer VNETB to VNET: the output from the Command to find the Resource ID for VNETA & VNETB is used with the --remote-vnet-id argument
+
+az network vnet peering create --name CLIRefVNETA-to-CLIRefVNETB --resource-group CLIRefRG --vnet-name CLIRefVNETA --allow-vnet-access --remote-vnet-id /subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/CLIRefRG/providers/Microsoft.Network/virtualNetworks/CLIRefVNETB
+
+# Peer VNETB to VNETA. the output from the command to find the Resource ID for VNETA is used with the --remote-vnet-id arugment
+
+az network vnet peering create --name CLIRefVNETB-to-CLIRefVNETA --resource-group CLIRefRG --vnet-name VNETB --allow-vnet-access --remote-vnet-id /subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/CLIRefRG/providers/Microsoft.Network/virtualNetworks/CLIRefVNETA
+
+#To See the Current State of the Peering
+
+az network vnet peering list --resource-group CLIRefRG --vnet-name CLIRefVNETA -o table

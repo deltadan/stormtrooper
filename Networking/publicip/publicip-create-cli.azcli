@@ -1,0 +1,2 @@
+# Creating a Public IP Address
+az network public-ip create -g CLIRefRG -n CLIRef-PublicIP1 --dns-name CLIRefpubip1xxx --allocation-method Static
