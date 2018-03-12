@@ -27,7 +27,7 @@ All code here using was written using [Visual Studio Code](https://code.visualst
 
 ## Folders
 
-Each of the folders contains scripts that I&#39;ve built for many different types of scenarios.  The folders are broken down into different Azure resource types such as Compute, Storage, Networking or Containers.  In each folder there are sample scripts.  Within each of these folders you will find the specific azure resource names.
+Each of the folders contains scripts that we&#39;ve built for many different types of scenarios.  The folders are broken down into different Azure resource types such as Compute, Storage, Networking or Containers.  In each folder there are sample scripts.  Within each of these folders you will find the specific azure resource names.
 ```
 /networking/vnets
 ```
@@ -65,7 +65,7 @@ A: Yes, this project is released using the MIT License.  Please review the Licen
 
 Q: Do you have PowerShell versions of these scripts?
 
-A: I have many, but have not built out a project yet.
+A: We have many, but have not built out a project for that yet.  Stormtrooper will be extended once we are happy with the CLI Samples.  If you want to get involved tweet us @stormtrooperio.
 
 Q: I'm having an issue with a script.
 
@@ -73,4 +73,4 @@ A: You can submit issues on the issues tab of the project.
 
 Q: I want to learn about the Azure CLI?  Do you have training?
 
-A: See my course on the Azure CLI at skillmeup.com. https://skillmeup.com/courses/player/azure-cli-2
+A: See the Azure CLI course on [SkillMeUp](https://skillmeup.com/courses/player/azure-cli-2).  This course was written by Stormtrooper founder @deltadan.
