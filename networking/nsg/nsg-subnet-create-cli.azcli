@@ -1,3 +1,9 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
 # Create the NSG
 
 az network nsg create --resource-group CLIRefRG --name AppsNSG

@@ -5,15 +5,16 @@
 # Copyright (c) 2018 Dan Patrick - @deltadan
 #
 #Script Purpose
-# - Perform operations against VMs in subscription
+# - Assoicate a NSG with an Exsisting NIC (NSG & NIC must exsist see /network/nsg-create.azcli
+#   & /network/nic-create.azcli)
 ###########################################################################################
 
 #Variables for Script
 RG=STRG
-location=centralus
-vmName=STVM
+nicName=STVM1-NIC
+nsgName=STVM1-NSG
 
-#Deallocate VM (stop VM and no charge for compute)
-az vm deallocate -n $vmName \
-                 -g $RG \
-                 --no-wait
+# Associate the NSG with an exsisting NIC
+az network nic update -g $RG \
+                      -n $nicName \
+                      --network-security-group $nsgName

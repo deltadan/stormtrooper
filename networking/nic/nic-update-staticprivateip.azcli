@@ -1,0 +1,8 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+# Update existing NIC to use a Static IP Address and set the IP
+az network nic ip-config update --name ipconfig1 --nic-name CLIRefwebvm1400 --resource-group CLIRefRG --private-ip-address 10.0.0.4
