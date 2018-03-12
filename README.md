@@ -16,7 +16,7 @@ Follow us on Twitter [@stormtrooperio](https://twitter.com/stormtrooperio)
 
 The Azure CLI is a powerful and fast tool that can be used to work with almost any service in Azure. The AZ CLI is cross platform and can be installed and run from Windows, Macs, Linux and even a Docker container.
 
-Visit the our [install page](https://github.com/deltadan/stormtrooper/tree/master/install-cli) to run our installer script from your bash prompt (even on windows).
+Visit the our [install page](https://github.com/deltadan/stormtrooper/tree/master/docs/install-cli) to run our installer script from your bash prompt (even on windows).
 
 ## BASH, Visual Studio Code &amp; Azure CLI Extension
 
