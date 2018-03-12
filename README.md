@@ -1,6 +1,6 @@
 <img src="https://octodex.github.com/images/stormtroopocat.jpg" width="200" height="200" />
 
-# Welcome to Stormtropper!
+# Welcome to Stormtrooper!
 
 In DevOps we want NO snowflakes, meaning that everything is the same everytime. Scripting is the only way to ensure that your environments be the same everytime and remove the risk of human error. Like you we write scripts all the time using the Azure CLI, but it feels like we always having to figure out the same commands over and over.
 
