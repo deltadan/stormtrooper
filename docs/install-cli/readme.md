@@ -10,7 +10,7 @@ The purpose of this script is to install the Azure CLI tool on your Debian based
 1. Paste the following command into your BASH Terminal (must be a Debian Distro)
 
 ```
-curl -s https://raw.githubusercontent.com/deltadan/azure-cli-reference/master/install-cli/install-cli.bash | bash -s
+curl -s https://raw.githubusercontent.com/deltadan/stormtrooper/master/docs/install-cli/install-cli.bash | bash -s
 ```
 
 For more information on installing the Azure CLI review the Microsoft [docs](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest).

@@ -8,7 +8,7 @@
 # - Easy Installer for the Azure CLI
 # - You can call this installer from any machine that can download files from GitHub - paste
 #   the line below into your terminal.
-#  curl -s https://raw.githubusercontent.com/deltadan/azure-cli-reference/master/install-cli/install-cli.bash | bash -s 
+#  curl -s https://raw.githubusercontent.com/deltadan/stormtrooper/master/docs/install-cli/install-cli.bash | bash -s 
 ###########################################################################################
 
 #Install Azure CLI on Debian Distro
