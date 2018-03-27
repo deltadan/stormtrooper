@@ -5,7 +5,7 @@
 # Copyright (c) 2018 Dan Patrick - @deltadan
 #
 #Script Purpose
-# - 
+# - Run this script after running the lampnetworking.azcli to have a LAMP App up in Azure
 ###########################################################################################
 
 regionName="centralus"
@@ -16,7 +16,7 @@ subnet1="Apps"
 subnet2="Data"
 addSubnet1="10.0.1.0/24"
 addSubnet2="10.0.2.0/24"
-ststor8675309
+storAcctName=ststor8675309
 webVM1Name=nginx1
 webVM1PubIP=nginx1PubIP
 webVM1DNSName=stwebvm1nginx1
@@ -35,7 +35,7 @@ az storage account create -n $storAcctName \
                           --resource-group $rgName
 
 # Creating a Public IP Address
-az network public-ip create -g $RG \
+az network public-ip create -g $rgName \
                             -n $pubIPName \
                             --dns-name $dnsName \
                             --allocation-method $allocMethod
@@ -45,7 +45,7 @@ az network nic create -n $webVM1NicName \
                       -g $rgName \
                       --subnet $subnet1 \
                       --vnet-name $vNetName \
-                       --public-ip-address $pubIPName \
+                      --public-ip-address $pubIPName \
                       -l "$regionName"
 
 az network nic create -n $dbVMNicName \
@@ -60,7 +60,6 @@ az vm create -n $webVM1Name \
              -g $rgName \
              -l $regionName \
              --size Standard_DS1_V2 \
-             --availability-set $avset1 \
              --nics $webVM1NicName \
              --authentication-type password \
              --admin-username demouser \
