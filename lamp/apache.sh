@@ -5,7 +5,7 @@ apt-get -y install apache2 php7.0 libapache2-mod-php7.0
 apt-get -y install php-mysql
 sudo a2enmod php7.0
 
-echo \<center\>\<h1\>TechSummit Azure Demo PHP App running on `hostname` \</h1\>\<br/\>\</center\> | tee -a /var/www/html/demoapp.php
+echo \<center\>\<h1\>Lamp Demo PHP App running on `hostname` \</h1\>\<br/\>\</center\> | tee -a /var/www/html/demoapp.php
 echo \<\?php | tee -a /var/www/html/demoapp.php
 echo \$servername \= \"mysql\"\;  | tee -a /var/www/html/demoapp.php
 echo \$username \= \"root\"\;  | tee -a /var/www/html/demoapp.php
