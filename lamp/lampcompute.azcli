@@ -1,0 +1,131 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - 
+###########################################################################################
+
+
+regionName="centralus"
+rgName="STRG"
+vNetName="STVNet"
+addPrefix="10.0.0.0/16"
+subnet1="Apps"
+subnet2="Data"
+addSubnet1="10.0.1.0/24"
+addSubnet2="10.0.2.0/24"
+ststor8675309
+webVM1Name=nginx1
+webVM1PubIP=nginx1PubIP
+webVM1DNSName=stwebvm1nginx1
+webVM1NicName=nginx1NIC
+webVM2Name=nginx2
+webVM2NicName=nginx2NIC
+dbVM=mysql
+dbVMNicName=mysqlNIC
+avset1=WebAVSet
+
+#Create Storage Account to be used with the VMs
+az storage account create -n $storAcctName \
+                          --sku Premium_LRS \
+                          -l "$regionName" \
+                          --kind Storage \
+                          --resource-group $rgName
+
+#Create the NICs for the VMs
+az network nic create -n $webVM1NicName \
+                      -g $rgName \
+                      --subnet $subnet1 \
+                      --vnet-name $vNetName \
+                      --public-ip-address $webVM1PubIP \
+                      -l "$regionName"
+
+az network nic create -n $webVM2NicName \
+                      -g $rgName \
+                      --subnet $subnet1 \
+                      --vnet-name $vNetName \
+                      -l "$regionName"
+
+az network nic create -n $dbVMNicName \
+                      -g $rgName \
+                      --subnet $subnet2 \
+                      --vnet-name $vNetName \
+                      -l "$regionName"
+
+#Create Availablity Set & VMs
+az vm availability-set create -n $avset1 \
+                              -g $rgName \
+                              --platform-fault-domain-count 2 \
+                              --platform-update-domain-count 2 \
+                              --unmanaged \
+                              -l $regionName
+
+az vm create -n $webVM1Name \
+             -g $rgName \
+             -l $regionName \
+             --size Standard_DS1_V2 \
+             --availability-set $avset1 \
+             --nics $webVM1NicName \
+             --authentication-type password \
+             --admin-username demouser \
+             --admin-password demo@pass123 \
+             --image "Canonical:UbuntuServer:17.04:latest" \
+             --use-unmanaged-disk \
+             --os-disk-name $webVM1Name-OSDISK \
+             --storage-account $storAcctName \
+             --storage-container-name vhds
+
+az vm create -n $webVM2Name \
+             -g $rgName \
+             -l $regionName \
+             --size Standard_DS1_V2 \
+             --availability-set $avset1 \
+             --nics $webVM2NicName \
+             --authentication-type password \
+             --admin-username demouser \
+             --admin-password demo@pass123 \
+             --image "Canonical:UbuntuServer:17.04:latest" \
+             --use-unmanaged-disk \
+             --os-disk-name $webVM2Name-OSDISK \
+             --storage-account $storAcctName \
+             --storage-container-name vhds
+
+az vm create -n $dbVM \
+             -g $rgName \
+             -l $regionName \
+             --size Standard_DS1_V2 \
+             --nics $dbVMNicName \
+             --authentication-type password \
+             --admin-username demouser \
+             --admin-password demo@pass123 \
+             --image "Canonical:UbuntuServer:17.04:latest" \
+             --use-unmanaged-disk \
+             --os-disk-name $dbVM-OSDISK \
+             --storage-account $storAcctName \
+             --storage-container-name vhds
+
+#Configure VMs using a the Custom Script extenion referencing a script on GitHub
+
+az vm extension set --publisher Microsoft.OSTCExtensions \
+                    -n CustomScriptForLinux \
+                    -g $rgName \
+                    --vm-name $webVM1Name \
+                    --version 1.4 \
+                    --settings "{ \"fileUris\": [\"https://raw.githubusercontent.com/deltadan/stormtrooper/lamp/apache.sh\"], \"commandToExecute\": \"bash apache.sh\" }"
+
+az vm extension set --publisher Microsoft.OSTCExtensions \
+                    -n CustomScriptForLinux \
+                    -g $rgName \
+                    --vm-name $webVM2Name \
+                    --version 1.4 \
+                    --settings "{ \"fileUris\": [\"https://raw.githubusercontent.com/deltadan/stormtrooper/lamp/apache.sh\"], \"commandToExecute\": \"bash apache.sh\" }"
+                              
+az vm extension set --publisher Microsoft.OSTCExtensions \
+                    -n CustomScriptForLinux \
+                    -g $rgName \
+                    --vm-name $dbVM \
+                    --version 1.4 \
+                    --settings "{ \"fileUris\": [\"https://raw.githubusercontent.com/deltadan/stormtrooper/lamp/master/awsdemo/mysql.sh\"], \"commandToExecute\": \"bash mysql.sh\" }"

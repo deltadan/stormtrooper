@@ -1,0 +1,19 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - 
+###########################################################################################
+
+rgName="STRG"
+storAcctName="ststor8675309"
+
+#Create Storage Account to be used with the VMs
+az storage account create -n $storAcctName \
+                          --sku Premium_LRS \
+                          -l "$regionName" \
+                          --kind Storage \
+                          --resource-group $rgName

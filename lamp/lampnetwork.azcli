@@ -1,0 +1,111 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - 
+###########################################################################################
+
+
+regionName="centralus"
+rgName="STRG"
+vNetName="STVNet"
+addPrefix="10.0.0.0/16"
+subnet1="Apps"
+subnet2="Data"
+addSubnet1="10.0.1.0/24"
+addSubnet2="10.0.2.0/24"
+
+#Create the Resource Group
+az group create --name $rgName --location $regionName
+
+#Create the Virtual Network & Subnets
+az network vnet create --resource-group $rgName \
+                       -n $vNetName \
+                       --address-prefixes $addPrefix \
+                       -l $regionName
+
+az network vnet subnet create --resource-group $rgName \
+                              --vnet-name $vNetName \
+                              -n $subnet1 \
+                              --address-prefix $addSubnet1
+ 
+az network vnet subnet create --resource-group $rgName \
+                              --vnet-name $vNetName \
+                              -n $subnet2 \
+                              --address-prefix $addSubnet2
+
+#Create the Network Security Group, Rules and assoicate with Web Tier
+
+az network nsg create -n AppsNSG \
+                      -g $rgName \
+                      -l $regionName
+
+az network nsg rule create -n LeastPrivilageRule \
+                           --nsg-name AppsNSG \
+                           --priority 1000 \
+                           -g $rgName \
+                           --access Deny \
+                           --description "DenyAll" \
+                           --direction Inbound \
+                           --destination-address-prefix "*" \
+                           --destination-port-range "*" \
+                           --source-address-prefix "*" \
+                           --source-port-range "*"
+
+az network nsg rule create -n SSH \
+                           --nsg-name AppsNSG \
+                           --priority 100 \
+                           -g $rgName \
+                           --access Allow \
+                           --description "SSH Access" \
+                           --direction Inbound \
+                           --protocol Tcp \
+                           --destination-address-prefix "*" \
+                           --destination-port-range 22 \
+                           --source-address-prefix "*" \
+                           --source-port-range "*"
+
+az network nsg rule create -n HTTP \
+                           --nsg-name AppsNSG \
+                           --priority 101 \
+                           -g $rgName \
+                           --access Allow \
+                           --description "Web Access" \
+                           --direction Inbound \
+                           --protocol Tcp \
+                           --destination-address-prefix "*" \
+                           --destination-port-range 80 \
+                           --source-address-prefix "*" \
+                           --source-port-range "*"
+
+az network vnet subnet update -n $subnet1 \
+                              -g $rgName \
+                              --vnet-name $vNetName \
+                              --network-security-group AppsNSG
+
+#Create the Network Security Group, Rules and assoicate with Data Tier
+
+az network nsg create -n DataNSG \
+                      -g $rgName \
+                      -l $regionName
+
+az network nsg rule create -n LeastPrivilageRule \
+                           --nsg-name DataNSG \
+                           --priority 1000 \
+                           -g $rgName \
+                           --access Deny \
+                           --description "DenyAll" \
+                           --direction Inbound \
+                           --protocol "*" \
+                           --destination-address-prefix "*" \
+                           --destination-port-range "*" \
+                           --source-address-prefix "*" \
+                           --source-port-range "*"
+
+az network vnet subnet update -n $subnet2 \
+                              -g $rgName \
+                              --vnet-name $vNetName \
+                              --network-security-group DataNSG
