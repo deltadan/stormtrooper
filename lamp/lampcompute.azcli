@@ -8,7 +8,6 @@
 # - 
 ###########################################################################################
 
-
 regionName="centralus"
 rgName="STRG"
 vNetName="STVNet"
@@ -22,11 +21,11 @@ webVM1Name=nginx1
 webVM1PubIP=nginx1PubIP
 webVM1DNSName=stwebvm1nginx1
 webVM1NicName=nginx1NIC
-webVM2Name=nginx2
-webVM2NicName=nginx2NIC
 dbVM=mysql
 dbVMNicName=mysqlNIC
-avset1=WebAVSet
+pubIPName=STPUBIP1
+dnsName=stpubdns8675309
+allocMethod=static
 
 #Create Storage Account to be used with the VMs
 az storage account create -n $storAcctName \
@@ -35,18 +34,18 @@ az storage account create -n $storAcctName \
                           --kind Storage \
                           --resource-group $rgName
 
+# Creating a Public IP Address
+az network public-ip create -g $RG \
+                            -n $pubIPName \
+                            --dns-name $dnsName \
+                            --allocation-method $allocMethod
+
 #Create the NICs for the VMs
 az network nic create -n $webVM1NicName \
                       -g $rgName \
                       --subnet $subnet1 \
                       --vnet-name $vNetName \
-                      --public-ip-address $webVM1PubIP \
-                      -l "$regionName"
-
-az network nic create -n $webVM2NicName \
-                      -g $rgName \
-                      --subnet $subnet1 \
-                      --vnet-name $vNetName \
+                       --public-ip-address $pubIPName \
                       -l "$regionName"
 
 az network nic create -n $dbVMNicName \
@@ -55,13 +54,7 @@ az network nic create -n $dbVMNicName \
                       --vnet-name $vNetName \
                       -l "$regionName"
 
-#Create Availablity Set & VMs
-az vm availability-set create -n $avset1 \
-                              -g $rgName \
-                              --platform-fault-domain-count 2 \
-                              --platform-update-domain-count 2 \
-                              --unmanaged \
-                              -l $regionName
+#Create VMs
 
 az vm create -n $webVM1Name \
              -g $rgName \
@@ -72,24 +65,9 @@ az vm create -n $webVM1Name \
              --authentication-type password \
              --admin-username demouser \
              --admin-password demo@pass123 \
-             --image "Canonical:UbuntuServer:17.04:latest" \
+             --image "Canonical:UbuntuServer:16.04-LTS:latest" \
              --use-unmanaged-disk \
              --os-disk-name $webVM1Name-OSDISK \
-             --storage-account $storAcctName \
-             --storage-container-name vhds
-
-az vm create -n $webVM2Name \
-             -g $rgName \
-             -l $regionName \
-             --size Standard_DS1_V2 \
-             --availability-set $avset1 \
-             --nics $webVM2NicName \
-             --authentication-type password \
-             --admin-username demouser \
-             --admin-password demo@pass123 \
-             --image "Canonical:UbuntuServer:17.04:latest" \
-             --use-unmanaged-disk \
-             --os-disk-name $webVM2Name-OSDISK \
              --storage-account $storAcctName \
              --storage-container-name vhds
 
@@ -101,7 +79,7 @@ az vm create -n $dbVM \
              --authentication-type password \
              --admin-username demouser \
              --admin-password demo@pass123 \
-             --image "Canonical:UbuntuServer:17.04:latest" \
+             --image "Canonical:UbuntuServer:16.04-LTS:latest" \
              --use-unmanaged-disk \
              --os-disk-name $dbVM-OSDISK \
              --storage-account $storAcctName \
@@ -114,18 +92,11 @@ az vm extension set --publisher Microsoft.OSTCExtensions \
                     -g $rgName \
                     --vm-name $webVM1Name \
                     --version 1.4 \
-                    --settings "{ \"fileUris\": [\"https://raw.githubusercontent.com/deltadan/stormtrooper/lamp/apache.sh\"], \"commandToExecute\": \"bash apache.sh\" }"
-
-az vm extension set --publisher Microsoft.OSTCExtensions \
-                    -n CustomScriptForLinux \
-                    -g $rgName \
-                    --vm-name $webVM2Name \
-                    --version 1.4 \
-                    --settings "{ \"fileUris\": [\"https://raw.githubusercontent.com/deltadan/stormtrooper/lamp/apache.sh\"], \"commandToExecute\": \"bash apache.sh\" }"
-                              
+                    --settings "{ \"fileUris\": [\"https://raw.githubusercontent.com/deltadan/stormtrooper/master/lamp/apache.sh\"], \"commandToExecute\": \"bash apache.sh\" }"
+ 
 az vm extension set --publisher Microsoft.OSTCExtensions \
                     -n CustomScriptForLinux \
                     -g $rgName \
                     --vm-name $dbVM \
                     --version 1.4 \
-                    --settings "{ \"fileUris\": [\"https://raw.githubusercontent.com/deltadan/stormtrooper/lamp/master/awsdemo/mysql.sh\"], \"commandToExecute\": \"bash mysql.sh\" }"
+                    --settings "{ \"fileUris\": [\"https://raw.githubusercontent.com/deltadan/stormtrooper/master/lamp/mysql.sh\"], \"commandToExecute\": \"bash mysql.sh\" }"

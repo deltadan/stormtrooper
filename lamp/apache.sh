@@ -1,4 +1,13 @@
 #!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - install a LAMP
+# - create a Sample PHP app
+###########################################################################################
 
 apt-get update
 apt-get -y install apache2 php7.0 libapache2-mod-php7.0

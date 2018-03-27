@@ -1,4 +1,13 @@
 #!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - Install MySQL
+###########################################################################################
+
 
 dbpass="mySQLPassw0rd"
 

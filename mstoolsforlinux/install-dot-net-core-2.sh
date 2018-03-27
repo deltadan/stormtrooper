@@ -1,4 +1,12 @@
-
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - Install dotnet core 2 on Linux
+###########################################################################################
 
 
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
