@@ -1,0 +1,19 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - Login to Azure CLI using Service Principal Name
+# - https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest#sign-in-using-the-service-principal
+###########################################################################################
+
+# Using Password
+az login --service-principal --username APP_ID --password PASSWORD --tenant TENANT_ID
+
+# Using Certficate
+az login --service-principal --username APP_ID --tenant TENANT_ID --password PATH_TO_CERT
+
+# Reset SPN password (becareful this could break other connections in applications)
+az ad sp credential reset --name APP_ID --password NEW_PASSWORD
