@@ -1,0 +1,24 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - Gets all Tags on All Resource Groups
+# - Adds the RG tags along with any exsisting resource Tags to All resources in subscription
+###########################################################################################
+rg=test
+groups=$(az group list --query [].name --output tsv)
+for rg in $groups
+do
+  jsontag=$(az group show -n $rg --query tags) || true
+  t=$(echo $jsontag | tr -d '"{},' | sed 's/: /=/g') || true
+  r=$(az resource list -g $rg --query [].id --output tsv) || true
+  for resid in $r
+  do
+    jsonrtag=$(az resource show --id $resid --query tags) || true
+    rt=$(echo $jsonrtag | tr -d '"{},' | sed 's/: /=/g') || true
+    az resource tag --tags $t$rt --id $resid || true
+  done
+done

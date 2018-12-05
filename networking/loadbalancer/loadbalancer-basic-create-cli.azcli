@@ -1,3 +1,23 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - Creating a new Azure Load Balancer with a Public IP Address
+# - Locate VMs with Restore Point
+# - Delete Restore Points
+# - Must provide the name of the resource group - looks like: AzureBackupRG_eastus_1 
+#   (these names are in portal, but show no resources)
+###########################################################################################
+RG=STRG
+nsgName=STVM1-NSG
+rule1Name=PORT_HTTP_80
+nicName=STVM1-NIC
+
+
+
 # Creating a Public IP Address
 az network public-ip create -g CLIRefRG -n CLIRefLB-PublicIP --dns-name CLIReflb --allocation-method Static
 

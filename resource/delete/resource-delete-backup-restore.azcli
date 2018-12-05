@@ -1,0 +1,24 @@
+#!/bin/bash
+###########################################################################################
+# Stormtrooper Project 
+# MIT License - https://github.com/deltadan/stormtrooper
+# Copyright (c) 2018 Dan Patrick - @deltadan
+#
+#Script Purpose
+# - When moving VMs between resource groups or subscriptions you must remove restore points
+# - Locate VMs with Restore Point
+# - Delete Restore Points
+# - Must provide the name of the resource group - looks like: AzureBackupRG_eastus_1 
+#   (these names are in portal, but show no resources)
+###########################################################################################
+
+rg=AzureBackupRG_regionNameHere_1 
+array=(backupJob1 backupJob2)
+
+for backupjobs in "${array[@]}"
+do
+az resource delete -g $rg \
+                   -n $backupjobs \
+                   --resource-type "Microsoft.Compute/restorePointCollections" \
+                   --verbose
+done
