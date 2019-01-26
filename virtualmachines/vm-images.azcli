@@ -2,11 +2,11 @@
 ###########################################################################################
 # Stormtrooper Project 
 # MIT License - https://github.com/deltadan/stormtrooper
-# Copyright (c) 2018 Dan Patrick - @deltadan
+# Copyright (c) 2019 Dan Patrick - @deltadan
 #
 #Script Purpose
 # - Find VM Images Offers
-# - Find VM 
+# - Find VM SKUs
 ###########################################################################################
 
 location=eastus2
