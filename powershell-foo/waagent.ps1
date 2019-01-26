@@ -18,7 +18,7 @@ Azure Guest Agent Reinstall Script
 Set-ExecutionPolicy Bypass -Scope Process -Force
 
 # Download the MSI file from an Azure Storage
-$uri = "https://sfcarchivevm.blob.core.windows.net/agent/WindowsAzureVmAgent.2.7.41491.895_181008-1523.fre.msi"
+$uri = "https://STORAGEACCT.blob.core.windows.net/agent/WindowsAzureVmAgent.2.7.41491.895_181008-1523.fre.msi"
 $downloadedFile = "$PSScriptRoot\WindowsAzureVmAgent.2.7.41491.895_181008-1523.fre.msi"
 Invoke-WebRequest $uri -OutFile $downloadedFile
 
